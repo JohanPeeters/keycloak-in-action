@@ -10,4 +10,8 @@ build:
 	@docker build -t $(TAG) .
 
 run: build
-	@docker run --name $(NAME) --rm -it -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin $(TAG)
+	@docker run --name $(NAME) --rm -it -p 8080:8080 \
+	 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin \
+	 -e KEYCLOAK_IMPORT=/tmp/realm.json \
+	 -v $(shell pwd)/realm.json:/tmp/realm.json \
+	 $(TAG)

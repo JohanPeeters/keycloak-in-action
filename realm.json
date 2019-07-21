@@ -169,6 +169,7 @@
           "consentRequired": false,
           "config": {
             "multivalued": "true",
+            "userinfo.token.claim": "true",
             "user.attribute": "foo",
             "id.token.claim": "true",
             "access.token.claim": "true",
@@ -501,11 +502,11 @@
           "protocolMapper": "oidc-usermodel-client-role-mapper",
           "consentRequired": false,
           "config": {
-            "multivalued": "true",
             "user.attribute": "foo",
             "access.token.claim": "true",
             "claim.name": "resource_access.${client_id}.roles",
-            "jsonType.label": "String"
+            "jsonType.label": "String",
+            "multivalued": "true"
           }
         },
         {
@@ -515,11 +516,11 @@
           "protocolMapper": "oidc-usermodel-realm-role-mapper",
           "consentRequired": false,
           "config": {
-            "multivalued": "true",
             "user.attribute": "foo",
             "access.token.claim": "true",
             "claim.name": "realm_access.roles",
-            "jsonType.label": "String"
+            "jsonType.label": "String",
+            "multivalued": "true"
           }
         }
       ]
@@ -578,8 +579,9 @@
   "adminEventsDetailsEnabled": false,
   "identityProviders": [
     {
-      "alias": "ADFS",
-      "internalId": "8b8e0af3-7264-4f39-85ca-d11fd8565148",
+      "alias": "oidc",
+      "displayName": "Ride-sharing Cogito User Pool",
+      "internalId": "a9ca37fb-e338-4d6a-938d-6b796871690c",
       "providerId": "oidc",
       "enabled": true,
       "updateProfileFirstLoginMode": "on",
@@ -591,16 +593,49 @@
       "firstBrokerLoginFlowAlias": "first broker login",
       "config": {
         "hideOnLoginPage": "",
+        "userInfoUrl": "https://rides.auth.eu-west-1.amazoncognito.com/oauth2/userInfo",
+        "validateSignature": "true",
+        "clientId": "57ln3h7quode85f88ckh9qbupk",
+        "tokenUrl": "https://rides.auth.eu-west-1.amazoncognito.com/oauth2/token",
+        "uiLocales": "",
+        "jwksUrl": "https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_Ik9bAAnZG/.well-known/jwks.json",
+        "backchannelSupported": "",
+        "issuer": "https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_Ik9bAAnZG",
+        "useJwksUrl": "true",
         "loginHint": "",
-        "validateSignature": "",
+        "authorizationUrl": "https://rides.auth.eu-west-1.amazoncognito.com/oauth2/authorize",
+        "disableUserInfo": "",
+        "clientSecret": "**********"
+      }
+    },
+    {
+      "alias": "ADFS",
+      "internalId": "5fedfab5-01f4-45df-96b3-8b84885e6d13",
+      "providerId": "oidc",
+      "enabled": true,
+      "updateProfileFirstLoginMode": "on",
+      "trustEmail": false,
+      "storeToken": false,
+      "addReadTokenRoleOnCreate": false,
+      "authenticateByDefault": false,
+      "linkOnly": false,
+      "firstBrokerLoginFlowAlias": "first broker login",
+      "config": {
+        "hideOnLoginPage": "",
+        "userInfoUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/userinfo",
+        "validateSignature": "true",
         "clientId": "keycloak",
         "tokenUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/oauth2/token/",
         "uiLocales": "",
+        "jwksUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/discovery/keys",
+        "backchannelSupported": "",
+        "issuer": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs",
+        "useJwksUrl": "true",
+        "loginHint": "",
         "authorizationUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/oauth2/authorize/",
         "disableUserInfo": "",
-        "clientSecret": "**********",
-        "backchannelSupported": "",
-        "useJwksUrl": "true"
+        "logoutUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/oauth2/logout",
+        "clientSecret": "**********"
       }
     }
   ],
@@ -614,14 +649,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
+            "oidc-usermodel-property-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "saml-role-list-mapper",
+            "oidc-address-mapper",
+            "oidc-full-name-mapper",
             "saml-user-property-mapper",
             "saml-user-attribute-mapper",
-            "oidc-usermodel-attribute-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
-            "oidc-address-mapper",
-            "saml-role-list-mapper",
-            "oidc-usermodel-property-mapper",
-            "oidc-full-name-mapper"
+            "oidc-usermodel-attribute-mapper"
           ]
         }
       },
@@ -701,13 +736,13 @@
         "config": {
           "allowed-protocol-mapper-types": [
             "oidc-address-mapper",
-            "oidc-usermodel-property-mapper",
-            "oidc-usermodel-attribute-mapper",
             "saml-role-list-mapper",
+            "oidc-full-name-mapper",
+            "oidc-usermodel-attribute-mapper",
             "saml-user-attribute-mapper",
-            "saml-user-property-mapper",
+            "oidc-usermodel-property-mapper",
             "oidc-sha256-pairwise-sub-mapper",
-            "oidc-full-name-mapper"
+            "saml-user-property-mapper"
           ]
         }
       }
@@ -755,7 +790,7 @@
   "supportedLocales": [],
   "authenticationFlows": [
     {
-      "id": "9a9015ab-f5a4-4dca-9cc1-f0ee619a1bba",
+      "id": "942f3537-4abf-4723-8b20-302a533c07b3",
       "alias": "Handle Existing Account",
       "description": "Handle what to do if there is existing account with same email/username like authenticated identity provider",
       "providerId": "basic-flow",
@@ -786,7 +821,7 @@
       ]
     },
     {
-      "id": "e5317f5f-9666-4ff1-bf63-25b82c51b7a5",
+      "id": "01e031e2-9e55-436f-a82f-8bc7643d7f9f",
       "alias": "Verify Existing Account by Re-authentication",
       "description": "Reauthentication of existing account",
       "providerId": "basic-flow",
@@ -810,7 +845,7 @@
       ]
     },
     {
-      "id": "f3372baa-97bb-45e7-acd3-cb2c6502d838",
+      "id": "718ad1f3-ce94-42a0-b710-76cdc260e5c5",
       "alias": "browser",
       "description": "browser based authentication",
       "providerId": "basic-flow",
@@ -848,7 +883,7 @@
       ]
     },
     {
-      "id": "cf4066a2-0d2b-4957-bff7-917c3b8cc50d",
+      "id": "d71aad04-4d03-45c7-8326-83a54af1c6c2",
       "alias": "clients",
       "description": "Base authentication for clients",
       "providerId": "client-flow",
@@ -886,7 +921,7 @@
       ]
     },
     {
-      "id": "0101a366-922b-4231-8fe1-08c08b33fb70",
+      "id": "ab28e904-ee0d-41cf-9678-391b3aff0940",
       "alias": "direct grant",
       "description": "OpenID Connect Resource Owner Grant",
       "providerId": "basic-flow",
@@ -917,7 +952,7 @@
       ]
     },
     {
-      "id": "8a85d25b-d72f-4c6f-83f3-243f3d11dd19",
+      "id": "9be4ed5e-2767-4f12-83db-1ef90d22a017",
       "alias": "docker auth",
       "description": "Used by Docker clients to authenticate against the IDP",
       "providerId": "basic-flow",
@@ -934,7 +969,7 @@
       ]
     },
     {
-      "id": "16379d63-ac9d-4c42-8c8e-4f23d8cf727d",
+      "id": "52d8cc3b-f279-47c9-8369-3afcd31410f0",
       "alias": "first broker login",
       "description": "Actions taken after first broker login with identity provider account, which is not yet linked to any Keycloak account",
       "providerId": "basic-flow",
@@ -967,7 +1002,7 @@
       ]
     },
     {
-      "id": "47acc132-44c6-4095-a5c5-9968bd486038",
+      "id": "92dcf99f-baae-4dec-ad16-ac4385502273",
       "alias": "forms",
       "description": "Username, password, otp and other auth forms.",
       "providerId": "basic-flow",
@@ -991,7 +1026,7 @@
       ]
     },
     {
-      "id": "e2b17291-e689-4c1d-9e2a-7f01dc0c4e75",
+      "id": "31953ed2-3388-4633-b1a4-da0ccf1d88eb",
       "alias": "http challenge",
       "description": "An authentication flow based on challenge-response HTTP Authentication Schemes",
       "providerId": "basic-flow",
@@ -1029,7 +1064,7 @@
       ]
     },
     {
-      "id": "f58fb21d-5fe5-4a40-8fa2-f467866f8c5f",
+      "id": "800b8547-aeac-4f10-ba67-5d038e485d93",
       "alias": "registration",
       "description": "registration flow",
       "providerId": "basic-flow",
@@ -1047,7 +1082,7 @@
       ]
     },
     {
-      "id": "ba1b154b-7145-458f-9f54-7bb40e4ede67",
+      "id": "c95b6f93-7cab-40a1-a93b-685fa6607b42",
       "alias": "registration form",
       "description": "registration form",
       "providerId": "form-flow",
@@ -1085,7 +1120,7 @@
       ]
     },
     {
-      "id": "b8434fac-1c07-4b46-b29f-fbd466447ce7",
+      "id": "f7c566e0-d8fd-47e8-9dff-b8d7643b596c",
       "alias": "reset credentials",
       "description": "Reset credentials for a user if they forgot their password or something",
       "providerId": "basic-flow",
@@ -1123,7 +1158,7 @@
       ]
     },
     {
-      "id": "c97febb9-06a4-4b32-939c-66cc1bf8a566",
+      "id": "95547715-60cf-4579-a57d-b6b1d3e13dea",
       "alias": "saml ecp",
       "description": "SAML ECP Profile Authentication Flow",
       "providerId": "basic-flow",
@@ -1142,14 +1177,14 @@
   ],
   "authenticatorConfig": [
     {
-      "id": "67323a97-ab9e-4518-911f-9ff77d63fe47",
+      "id": "64bb604c-9454-458e-a3c8-fc73cd558626",
       "alias": "create unique user config",
       "config": {
         "require.password.update.after.registration": "false"
       }
     },
     {
-      "id": "df6fd572-6578-4183-8c38-759b7966efbf",
+      "id": "10139c46-bb38-4bb9-b5ed-dfff570262cd",
       "alias": "review profile config",
       "config": {
         "update.profile.on.first.login": "missing"

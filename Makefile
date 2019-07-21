@@ -10,8 +10,11 @@ build:
 	@docker build -t $(TAG) .
 
 run: build
-	@docker run --name $(NAME) --rm -it -p 8080:8080 \
+	@docker run --name $(NAME) --rm -it -p 8080:8080 -p 8443:8443 \
 	 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin \
 	 -e KEYCLOAK_IMPORT=/tmp/realm.json \
-	 -v $(shell pwd)/realm.json:/tmp/realm.json \
+	 -v $(shell pwd):/tmp \
 	 $(TAG)
+
+reload:
+	@docker exec keycloak /opt/jboss/keycloak/bin/jboss-cli.sh --connect reload

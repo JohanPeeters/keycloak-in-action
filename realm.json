@@ -859,6 +859,41 @@
         "logoutUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/oauth2/logout",
         "clientSecret": "**********"
       }
+	    },
+    {
+      "alias": "saml",
+      "displayName": "ADFS-SAML",
+      "internalId": "6b29d292-2271-4a2b-83a5-dc873a8aa3cf",
+      "providerId": "saml",
+      "enabled": true,
+      "updateProfileFirstLoginMode": "on",
+      "trustEmail": false,
+      "storeToken": false,
+      "addReadTokenRoleOnCreate": false,
+      "authenticateByDefault": false,
+      "linkOnly": false,
+      "firstBrokerLoginFlowAlias": "first broker login",
+      "config": {
+        "hideOnLoginPage": "",
+        "validateSignature": "false",
+        "samlXmlKeyNameTranformer": "KEY_ID",
+        "signingCertificate": "MIIDHDCCAgSgAwIBAgIQZ4N38nfkBblF7kSO5R7+UjANBgkqhkiG9w0BAQsFADBKMUgwRgYDVQQDEz9BREZTIFNpZ25pbmcgLSBzb2Z0d2FyZXdvbHZlc2FkZnMud2VzdGV1cm9wZS5jbG91ZGFwcC5henVyZS5jb20wHhcNMTkwNzE0MTYyNTQwWhcNMjAwNzEzMTYyNTQwWjBKMUgwRgYDVQQDEz9BREZTIFNpZ25pbmcgLSBzb2Z0d2FyZXdvbHZlc2FkZnMud2VzdGV1cm9wZS5jbG91ZGFwcC5henVyZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDkncgQveLJ/bgU8Ul5R+kEHudBAIqYTyHxH+KWduogWNKlc32/M5epfFGjA/3GH+kaFcMdNMaYRa6OCpgG2Dc6HC/gvVnhbLyVrCO0opo5bgGEp2HZcPZBDEwVhN4zb9DMjnf111/57u245MC+k/nfkq6IjCcULNkCyUzO1uyuLVJwkbAPC8LRvn5rxUN2OXJlKDOwuqMasPBv7IOnNY0q55TxaZkS5XwZ0BiWPX0ei7jTIy2AuFsZ0ibfIXmpUC6zyF/VYvbODOZTvqj4S1Lz4U2MmLnEp7m8lrLklkb5OOh94gFGPzlEnPmlY5ka6HlrqpPtCBtoQO+icxLtewTBAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKxWICUB7e3iBqo0Niomlw6jf217YsflzCh/GcWPnmMil3N/PRRwlIpnqWxjGrBRFHKZPOhN2odiLfF0r4OliEd2mFx37BcU6XkHw7UhKjCB/0ORYHAA8QPteJiF5WXXzBoSQBYaIiqpcDUa02HkynN4nnwM5clQ7p4uRUahE4J583whY+TVJwxd99hmP2riNDzMoZDoqCVxwUKT2DyojCfy26mBC5xElw2nYN97XhFuH1tRynVN9CWJw3Lh66QqwVXzqVizgP0PW9FNyqKdbUTWMIoq0KZnIpS/LVuiytLgIjZHKX+GLyS+cJbVoZDq3FYIJzmtdWPFzS8Yp6TZ3VY=",
+        "postBindingLogout": "true",
+        "nameIDPolicyFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent",
+        "postBindingResponse": "true",
+        "singleLogoutServiceUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/ls/",
+        "backchannelSupported": "",
+        "signatureAlgorithm": "RSA_SHA256",
+        "wantAssertionsEncrypted": "",
+        "useJwksUrl": "true",
+        "wantAssertionsSigned": "",
+        "postBindingAuthnRequest": "true",
+        "forceAuthn": "",
+        "singleSignOnServiceUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/ls/",
+        "wantAuthnRequestsSigned": "false",
+        "addExtensionsElementWithKeyInfo": "false",
+        "encryptionPublicKey": "MIIDIjCCAgqgAwIBAgIQFSgpDSfWV5NEIZXlGasAcTANBgkqhkiG9w0BAQsFADBNMUswSQYDVQQDE0JBREZTIEVuY3J5cHRpb24gLSBzb2Z0d2FyZXdvbHZlc2FkZnMud2VzdGV1cm9wZS5jbG91ZGFwcC5henVyZS5jb20wHhcNMTkwNzE0MTYyNTQwWhcNMjAwNzEzMTYyNTQwWjBNMUswSQYDVQQDE0JBREZTIEVuY3J5cHRpb24gLSBzb2Z0d2FyZXdvbHZlc2FkZnMud2VzdGV1cm9wZS5jbG91ZGFwcC5henVyZS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDD3+K6DtuYBeiKCO4ZR08iDy21FrdeMl1O6KHNI4wv/d5ivSd5etW4Zh8IAw8veRRaeVIS9NGgkP7GWy1SHol/tYoWDOX0sHr5AE3E9EzuKt5BVNF/cWmaDMAvw7ojCa3v14B7+QbH4hSSLcvkGEpuMB8Lo9hubU4R5ufVwrM+3SiG/p03MqrRVqeUYlJRwxDB1wp5HKYzGYzSGEcPsjSS+s0ankQfKyyky2NwgtwnOIQfnkg8dsQ6oviJli0oms2JYYdaX9BWDvbzJbmMBG3cLAvSOosrjzzjjMUtc3bzOXS9UwAOfiaIj8JoH2AEC94YdkUounn95viZIvrg48y1AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAItQnIFYoSGkNgs74X1/7TaOpGuasTkl/z+YZ5S5tqvUXv3WGMuiBZNbDiG2Y06gGOEOyxW/QBin2k6XDaCuKHSxP2O7LX01aiegsrhCVihjeyUCv6+HsmKjVBaIJxbF0hGwOio6E871tArY+mtDYRV0L5NWhEzC1q6uXvUHzoROXideaQ3+zeF/oyMnWV+grFCvFQPa9cqR+rHBN/z1xskGobCmWtIUACsc5arGnVzV28sfxiPU+DwWIQxILWpKeHSySlRpfVjYQsk7+Owzl1wW2k9f8Bk52234k0x4OFzx6xwRD74W68b3lUUIC2nzGilJnf7deepMg/NvrvPYfAs="
+      } 
     }
   ],
   "components": {
@@ -878,9 +913,12 @@
 											 
             "saml-role-list-mapper",
             "oidc-address-mapper",
+										
+											 
             "oidc-full-name-mapper",
             "saml-user-property-mapper",
             "saml-user-attribute-mapper",
+											  
             "oidc-usermodel-attribute-mapper"
           ]
         }
@@ -961,6 +999,9 @@
         "config": {
           "allowed-protocol-mapper-types": [
             "oidc-address-mapper",
+										
+										 
+											  
             "saml-role-list-mapper",
             "oidc-full-name-mapper",
 									

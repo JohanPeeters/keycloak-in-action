@@ -1,6 +1,6 @@
 {
-  "id": "End users",
-  "realm": "End users",
+  "id": "Endusers",
+  "realm": "Endusers",
   "notBefore": 0,
   "revokeRefreshToken": false,
   "refreshTokenMaxReuse": 0,
@@ -205,13 +205,13 @@
       "id": "4aa24208-8c4a-446b-87eb-00a874acea2e",
       "clientId": "security-admin-console",
       "name": "${client_security-admin-console}",
-      "baseUrl": "/auth/admin/End users/console/index.html",
+      "baseUrl": "/auth/admin/Endusers/console/index.html",
       "surrogateAuthRequired": false,
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "/auth/admin/End users/console/*"
+        "/auth/admin/Endusers/console/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -252,7 +252,7 @@
       "id": "5b696ecb-cf6b-4c16-b650-465b8c7a4514",
       "clientId": "account",
       "name": "${client_account}",
-      "baseUrl": "/auth/realms/End users/account",
+      "baseUrl": "/auth/realms/Endusers/account",
       "surrogateAuthRequired": false,
       "enabled": true,
       "clientAuthenticatorType": "client-secret",
@@ -262,7 +262,7 @@
         "view-profile"
       ],
       "redirectUris": [
-        "/auth/realms/End users/account/*"
+        "/auth/realms/Endusers/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,

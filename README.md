@@ -22,7 +22,18 @@ A single client has been configured with identifier `spa`. This client can start
 
 Keycloak has been configured to act as a broker for several Identity Providers. For this to work, the `client_secret` for these IdPs needs to be configured - these are not in the configuration.
 
-#Under the hood
+# Lessons learned
+* When using ADFS as an Identity Provider, one can choose between a SAML integration or an OIDC integration. Both work, but the OIDC integration is a bit easier since the discovery document can be used to establish trust. In SAML, an exchange of certificates is a mandatory prerequisite. 
+* Do not use white spaces in the realm names. This will give encoding problems. 
+* When using SAML, the nameidentifier must have the same format as expected by the Identity Provider (e.g. persistent)
+* Troubleshooting:
+    * use https://www.samltool.com/decode.php to decode SAML tokens
+    * use Keycloak's output console
+    * (ADFS only) use the Windows Event Viewer
+    * (ADFS only) increase the logging level: `Set-AdfsProperties -AuditLevel Verbose` 
+
+
+# Under the hood
 
 The magic happens in `realm.json`, where the configuration changes reside.
 
@@ -35,3 +46,6 @@ The configuration for a demo is currently hard-coded. This is not a good practic
 The Dockerfile does not really do anything currently - it merely specifies the version of a Keycloak Docker base image. This could have been done on the command line as well. Consider it a placeholder for further layers.
 
 A self-signed certificate is used for KeyCloak, so your browser will not like that.
+
+# References
+* https://www.keycloak.org/2017/03/how-to-setup-ms-ad-fs-30-as-brokered-identity-provider-in-keycloak.html

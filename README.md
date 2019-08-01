@@ -23,7 +23,9 @@ A single client has been configured with identifier `spa`. This client can start
 Keycloak has been configured to act as a broker for several Identity Providers. For this to work, the `client_secret` for these IdPs needs to be configured - these are not in the configuration.
 
 # Lessons learned
-* When using ADFS as an Identity Provider, one can choose between a SAML integration or an OIDC integration. Both work, but the OIDC integration is a bit easier since the discovery document can be used to establish trust. In SAML, an exchange of certificates is a mandatory prerequisite. 
+* When using ADFS as an Identity Provider, one can choose between a SAML integration or an OIDC integration. Both work, but the OIDC integration is a bit easier since the discovery document can be used to establish trust. In SAML, an exchange of certificates is a mandatory prerequisite.
+* However, the downside of using OIDC is that it is impossible to pass claims from ADFS to Keycloak to create local Keycloak users. This is due to https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/overview/ad-fs-faq#i-am-trying-to-get-additional-claims-on-the-user-info-endpoint-but-its-only-returning-subject-how-can-i-get-additional-claims => Keycloak queries the ADFS userinfo endpoint for additional claims, but ADFS only returns the sub claim. 
+* The above issue can usually be resolved by create a 'dummy API' in ADFS, linking it to the Keycloak client, and then adding extra claims to the access token. However, Keycloak does not expect the claims to be present in the access token, instead it expects them to be present at the userinfo endpoint.  
 * Do not use white spaces in the realm names. This will give encoding problems. 
 * When using SAML, the nameidentifier must have the same format as expected by the Identity Provider (e.g. persistent)
 * Troubleshooting:

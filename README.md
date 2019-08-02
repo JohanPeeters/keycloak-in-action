@@ -28,7 +28,7 @@ Keycloak has been configured to act as a broker for several Identity Providers. 
 * The above issue can be resolved by create a 'dummy API' in ADFS, linking it to the Keycloak client, and then adding extra claims to the access token. 
     * I assume keycloak is created as a confidential server application in an Application Group
     * Add a dummy API to that application group, make sure the 'relying party identifier' exactly matches the clientId of the server application
-    * The default client permissions are fine (no need for the allatclaims checkbox)
+    * Make sure to check 'allatclaims' in the client permissions tab. This is required since Keycloak maps from the id_token, not from the access_token
     * Create a new transform rule which sends the following LDAP attributes: E-Mail-Addresses, Given_name, Surname
     * Apply
 * For this solution to work, you must tell Keycloak NOT to call the userinfo endpoint (since the access token issued by ADFS will only be valid for the 'dummy API', not for the userinfo endpoint. The userinfo endpoint does not contain much info anyway, see above)

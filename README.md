@@ -24,9 +24,18 @@ Keycloak has been configured to act as a broker for several Identity Providers. 
 
 # Lessons learned
 * When using ADFS as an Identity Provider, one can choose between a SAML integration or an OIDC integration. Both work, but the OIDC integration is a bit easier since the discovery document can be used to establish trust. In SAML, an exchange of certificates is a mandatory prerequisite.
-* However, the downside of using OIDC is that it is impossible to pass claims from ADFS to Keycloak to create local Keycloak users. This is due to https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/overview/ad-fs-faq#i-am-trying-to-get-additional-claims-on-the-user-info-endpoint-but-its-only-returning-subject-how-can-i-get-additional-claims => Keycloak queries the ADFS userinfo endpoint for additional claims, but ADFS only returns the sub claim. 
-* Note that this issue is not due to missing scopes. I have added the correct scopes for the userinfo endpoint using `Grant-AdfsApplicationPermission -ClientRoleIdentifier keycloak -ServerRoleIdentifier urn:microsoft:userinfo -ScopeNames openid,email`. It really is a 'feature' of ADFS.
-* The above issue can usually be resolved by create a 'dummy API' in ADFS, linking it to the Keycloak client, and then adding extra claims to the access token. However, Keycloak does not expect the claims to be present in the access token, instead it expects them to be present at the userinfo endpoint.  
+* However, the downside of using OIDC is that it is impossible to pass claims via the ADFS userinfo endpoint to Keycloak to create local Keycloak users. This is due to https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/overview/ad-fs-faq#i-am-trying-to-get-additional-claims-on-the-user-info-endpoint-but-its-only-returning-subject-how-can-i-get-additional-claims => Keycloak queries the ADFS userinfo endpoint for additional claims, but ADFS only returns the sub claim. Note that this issue is not due to missing scopes. Even if the correct scopes are added using `Grant-AdfsApplicationPermission -ClientRoleIdentifier keycloak -ServerRoleIdentifier urn:microsoft:userinfo -ScopeNames openid,email`. It really is a 'feature' of ADFS.
+* The above issue can be resolved by create a 'dummy API' in ADFS, linking it to the Keycloak client, and then adding extra claims to the access token. 
+    * I assume keycloak is created as a confidential server application in an Application Group
+    * Add a dummy API to that application group, make sure the 'relying party identifier' exactly matches the clientId of the server application
+    * The default client permissions are fine (no need for the allatclaims checkbox)
+    * Create a new transform rule which sends the following LDAP attributes: E-Mail-Addresses, Given_name, Surname
+    * Apply
+* For this solution to work, you must tell Keycloak NOT to call the userinfo endpoint (since the access token issued by ADFS will only be valid for the 'dummy API', not for the userinfo endpoint. The userinfo endpoint does not contain much info anyway, see above)
+* Then, in Keycloak, you must map the attributes from the ADFS token to attributes Keycloak understands:
+    * email to email
+    * family_name to lastName
+    * given_name to firstName
 * Do not use white spaces in the realm names. This will give encoding problems. 
 * When using SAML, the nameidentifier must have the same format as expected by the Identity Provider (e.g. persistent)
 * Troubleshooting:
@@ -52,3 +61,4 @@ A self-signed certificate is used for KeyCloak, so your browser will not like th
 
 # References
 * https://www.keycloak.org/2017/03/how-to-setup-ms-ad-fs-30-as-brokered-identity-provider-in-keycloak.html
+* https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/development/custom-id-tokens-in-ad-fs

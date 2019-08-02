@@ -856,9 +856,10 @@
         "useJwksUrl": "true",
         "loginHint": "",
         "authorizationUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/oauth2/authorize/",
-        "disableUserInfo": "",
+        "disableUserInfo": "true",
         "logoutUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/oauth2/logout",
         "clientSecret": "**********"
+								
       }
     },
     {
@@ -897,6 +898,38 @@
       }
     }
   ],
+"identityProviderMappers": [
+    {
+      "id": "924aba7b-a3c0-4829-b3be-44ccdaf4b707",
+      "name": "Last name",
+      "identityProviderAlias": "ADFS",
+      "identityProviderMapper": "oidc-user-attribute-idp-mapper",
+      "config": {
+        "claim": "family_name",
+        "user.attribute": "lastName"
+      }
+    },
+    {
+      "id": "324aab25-6497-4af3-9a76-e16c50345e49",
+      "name": "First name",
+      "identityProviderAlias": "ADFS",
+      "identityProviderMapper": "oidc-user-attribute-idp-mapper",
+      "config": {
+        "claim": "given_name",
+        "user.attribute": "firstName"
+      }
+    },
+    {
+      "id": "ee053f76-c167-45b1-9d1d-9bab04c4393c",
+      "name": "UPN_to_email",
+      "identityProviderAlias": "ADFS",
+      "identityProviderMapper": "oidc-user-attribute-idp-mapper",
+      "config": {
+        "claim": "email",
+        "user.attribute": "email"
+      }
+    }
+  ],								   
   "components": {
     "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy": [
       {
@@ -907,7 +940,11 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
+											  
+									
+										
             "saml-role-list-mapper",
+											 
             "saml-user-attribute-mapper",
             "oidc-address-mapper",
             "oidc-usermodel-property-mapper",
@@ -998,9 +1035,13 @@
             "oidc-address-mapper",
             "saml-user-attribute-mapper",
             "saml-user-property-mapper",
+								  
             "saml-role-list-mapper",
             "oidc-sha256-pairwise-sub-mapper",
             "oidc-usermodel-property-mapper"
+									
+										 
+											 
           ]
         }
       }

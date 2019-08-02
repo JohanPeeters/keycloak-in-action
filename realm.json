@@ -921,7 +921,7 @@
     },
     {
       "id": "ee053f76-c167-45b1-9d1d-9bab04c4393c",
-      "name": "UPN_to_email",
+      "name": "email_to_email",
       "identityProviderAlias": "ADFS",
       "identityProviderMapper": "oidc-user-attribute-idp-mapper",
       "config": {

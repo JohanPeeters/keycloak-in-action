@@ -858,9 +858,7 @@
         "authorizationUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/oauth2/authorize/",
         "disableUserInfo": "true",
         "logoutUrl": "https://softwarewolvesadfs.westeurope.cloudapp.azure.com/adfs/oauth2/logout",
-        "clientSecret": "**********",
-        "defaultScope": "openid email given_name family_name"
-
+        "clientSecret": "**********"
 								
       }
     },
